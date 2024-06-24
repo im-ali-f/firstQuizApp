@@ -81,8 +81,8 @@ fun QuestionComp(
 
     if (questionList.value.size >= 10) {
 
-        val randomElements =
-            questionList.value.shuffled(Random(System.currentTimeMillis())).take(10)
+        val randomElements = remember { questionList.value.shuffled(Random(System.currentTimeMillis())).take(10) }
+
 
 
         var questionCounter by remember {
