@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.quizapp.VMs.Room.RoomModel
+import kotlin.random.Random
 
 class QuizVM(
     private val mainViewModel: MainViewModel,
@@ -33,7 +34,7 @@ class QuizVM(
     val passwordVisible2 = mutableStateOf(false)
 
 
-    /* val loggedInUser = mutableStateOf(
+     val loggedInUser = mutableStateOf(
          UserInfoResponseListItem(
              role = "",
              id = "",
@@ -44,12 +45,13 @@ class QuizVM(
          )
      )
 
-     */
+
     //for test
+    /*
     val loggedInUser = mutableStateOf(
         UserInfoResponseListItem(
-            role = "member",
-            //role = "admin",
+            //role = "member",
+            role = "admin",
             id = "1",
             password = "123",
             name = "ali",
@@ -57,6 +59,8 @@ class QuizVM(
             lastname = "farhad"
         )
     )
+
+     */
 
 
     fun LoginFunctionallity() {
@@ -85,6 +89,35 @@ class QuizVM(
                 Log.d("errorResponse", response.errorBody()?.string() as String)
             }
         })
+    }
+    fun LogoutFunctionallity() {
+        loggedInUser.value =
+            UserInfoResponseListItem(
+                role = "",
+                id = "",
+                password = "",
+                name = "",
+                firstname = "",
+                lastname = ""
+            )
+        canContinue.value = false
+        canContinue2.value = false
+        userpassError.value = false
+        userExsitanceError.value = false
+        passwordError.value = false
+        enteredName.value = ""
+        enteredPass.value = ""
+
+        enteredName2.value = ""
+        enteredPass2.value = ""
+        enteredRePass.value = ""
+        enteredfirstName.value = ""
+        enteredlastName.value =""
+        enteredRole.value ="member"
+        passwordVisible.value = false
+        passwordVisible2.value = false
+        navController.navigate("signupPage")
+
     }
 
     fun SignupFunctionallity() {
@@ -142,6 +175,24 @@ class QuizVM(
             passwordError.value = true
         }
 
+
+    }
+
+    fun add10Question(){
+        var counter = 1
+        while(counter <= 10){
+            val bodyToSend = RoomModel(
+                id = 0,
+                text = "default question number ${counter}",
+                correctAnswer = "${Random.nextInt(1, 5)}",
+                answer1 = "ans 1",
+                answer2 = "ans 2",
+                answer3 = "ans 3",
+                answer4 = "ans 4"
+            )
+            mainViewModel.InsertQuestion(bodyToSend)
+            counter +=1
+        }
 
     }
 

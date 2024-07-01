@@ -54,6 +54,7 @@ import com.example.quizapp.ui.theme.disabledText
 import com.example.quizapp.ui.theme.enabledText
 import com.example.quizapp.ui.theme.labelColor
 import com.example.quizapp.ui.theme.mainBGCColor
+import com.example.quizapp.ui.theme.mainFontColor
 import com.example.whatsapp.VMs.API.MainViewModel
 import com.example.whatsapp.VMs.API.QuizVM
 
@@ -95,7 +96,7 @@ fun HomePage(
                                             fontWeight = FontWeight(600),
                                             fontSize = 16.sp,
                                             textAlign = TextAlign.Center,
-                                            color = Color.White
+                                            color = mainFontColor
                                         )
                                         //seperator
                                         Spacer(modifier = Modifier.height(10.dp))
@@ -108,7 +109,7 @@ fun HomePage(
                                             Box(
                                                 modifier = Modifier
                                                     .height(1.dp)
-                                                    .background(Color.White)
+                                                    .background(mainFontColor)
                                                     .fillMaxWidth()
                                             )
 
@@ -125,7 +126,8 @@ fun HomePage(
                                 val scrollState = rememberScrollState()
                                 Column(
                                     Modifier
-                                        .fillMaxSize().padding(20.dp)
+                                        .fillMaxSize()
+                                        .padding(20.dp)
                                         .verticalScroll(scrollState),
                                     verticalArrangement = Arrangement.Center,
                                     horizontalAlignment = Alignment.CenterHorizontally
@@ -161,6 +163,21 @@ fun HomePage(
                                             fontWeight = FontWeight(600)
                                         )
                                     }
+                                    Spacer(modifier = Modifier.height(10.dp))
+                                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                                        Text(
+                                            modifier = Modifier
+                                                .clip(RoundedCornerShape(8.dp))
+                                                .background(Color.Red)
+                                                .clickable { if (model.canContinue.value) model.LogoutFunctionallity() }
+                                                .padding(5.dp),
+                                            text = "Sign out",
+                                            fontWeight = FontWeight(600),
+                                            fontSize = 17.sp,
+                                            textAlign = TextAlign.Center,
+                                            color = Color.White
+                                        )
+                                    }
 
                                 }
                             }
@@ -182,8 +199,8 @@ fun HomePage(
                             .clip(RoundedCornerShape(0, 0, 40, 40))
                             //.background(mainGray)
                             .padding(end = 5.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        //horizontalArrangement = Arrangement.SpaceBetween
+                       // verticalAlignment = Alignment.CenterVertically,
+                       // horizontalArrangement = Arrangement.SpaceBetween
                     ) {
 
                         Row(
@@ -197,7 +214,7 @@ fun HomePage(
                                     fontWeight = FontWeight(600),
                                     fontSize = 16.sp,
                                     textAlign = TextAlign.Center,
-                                    color = Color.White
+                                    color = Color.Red
                                 )
                                 //seperator
                                 Spacer(modifier = Modifier.height(10.dp))
@@ -210,7 +227,7 @@ fun HomePage(
                                     Box(
                                         modifier = Modifier
                                             .height(1.dp)
-                                            .background(Color.White)
+                                            .background(mainFontColor)
                                             .fillMaxWidth()
                                     )
 
@@ -220,6 +237,8 @@ fun HomePage(
 
 
                         }
+
+
 
 
                     }
@@ -240,7 +259,7 @@ fun HomePage(
                                 fontWeight = FontWeight(600),
                                 fontSize = 16.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.White
+                                color = mainFontColor
                             )
                             Spacer(modifier = Modifier.height(10.dp))
                             TextField(
@@ -250,7 +269,8 @@ fun HomePage(
                                     .padding(0.dp),
                                 textStyle = TextStyle(
                                     fontWeight = FontWeight(500),
-                                    fontSize = 15.sp
+                                    fontSize = 15.sp,
+                                    color = mainFontColor
                                 ),
                                 colors = TextFieldDefaults.colors(
                                     focusedTextColor = Color.White,
@@ -262,7 +282,7 @@ fun HomePage(
                                 placeholder = {
                                     Text(
                                         text = "متن سوال",
-                                        color = Color.White,
+                                        color = mainFontColor,
                                         fontSize = 17.sp,
                                         fontWeight = FontWeight(500)
                                     )
@@ -277,7 +297,7 @@ fun HomePage(
                                 fontWeight = FontWeight(600),
                                 fontSize = 16.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.White
+                                color = mainFontColor
                             )
                             Spacer(modifier = Modifier.height(10.dp))
                             TextField(
@@ -287,7 +307,8 @@ fun HomePage(
                                     .padding(0.dp),
                                 textStyle = TextStyle(
                                     fontWeight = FontWeight(500),
-                                    fontSize = 15.sp
+                                    fontSize = 15.sp,
+                                    color = mainFontColor
                                 ),
                                 colors = TextFieldDefaults.colors(
                                     focusedTextColor = Color.White,
@@ -299,7 +320,7 @@ fun HomePage(
                                 placeholder = {
                                     Text(
                                         text = "گزینه 1",
-                                        color = Color.White,
+                                        color = mainFontColor,
                                         fontSize = 17.sp,
                                         fontWeight = FontWeight(500)
                                     )
@@ -313,7 +334,7 @@ fun HomePage(
                                 fontWeight = FontWeight(600),
                                 fontSize = 16.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.White
+                                color = mainFontColor
                             )
                             Spacer(modifier = Modifier.height(10.dp))
                             TextField(
@@ -323,7 +344,8 @@ fun HomePage(
                                     .padding(0.dp),
                                 textStyle = TextStyle(
                                     fontWeight = FontWeight(500),
-                                    fontSize = 15.sp
+                                    fontSize = 15.sp,
+                                    color = mainFontColor
                                 ),
                                 colors = TextFieldDefaults.colors(
                                     focusedTextColor = Color.White,
@@ -335,7 +357,7 @@ fun HomePage(
                                 placeholder = {
                                     Text(
                                         text = "گزینه 2",
-                                        color = Color.White,
+                                        color =mainFontColor,
                                         fontSize = 17.sp,
                                         fontWeight = FontWeight(500)
                                     )
@@ -349,7 +371,7 @@ fun HomePage(
                                 fontWeight = FontWeight(600),
                                 fontSize = 16.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.White
+                                color =mainFontColor
                             )
                             Spacer(modifier = Modifier.height(10.dp))
                             TextField(
@@ -359,7 +381,8 @@ fun HomePage(
                                     .padding(0.dp),
                                 textStyle = TextStyle(
                                     fontWeight = FontWeight(500),
-                                    fontSize = 15.sp
+                                    fontSize = 15.sp,
+                                    color = mainFontColor
                                 ),
                                 colors = TextFieldDefaults.colors(
                                     focusedTextColor = Color.White,
@@ -371,7 +394,7 @@ fun HomePage(
                                 placeholder = {
                                     Text(
                                         text = "گزینه 3",
-                                        color = Color.White,
+                                        color = mainFontColor,
                                         fontSize = 17.sp,
                                         fontWeight = FontWeight(500)
                                     )
@@ -385,7 +408,7 @@ fun HomePage(
                                 fontWeight = FontWeight(600),
                                 fontSize = 16.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.White
+                                color =mainFontColor
                             )
                             Spacer(modifier = Modifier.height(10.dp))
                             TextField(
@@ -395,7 +418,8 @@ fun HomePage(
                                     .padding(0.dp),
                                 textStyle = TextStyle(
                                     fontWeight = FontWeight(500),
-                                    fontSize = 15.sp
+                                    fontSize = 15.sp,
+                                    color = mainFontColor
                                 ),
                                 colors = TextFieldDefaults.colors(
                                     focusedTextColor = Color.White,
@@ -407,7 +431,7 @@ fun HomePage(
                                 placeholder = {
                                     Text(
                                         text = "گزینه 4",
-                                        color = Color.White,
+                                        color = mainFontColor,
                                         fontSize = 17.sp,
                                         fontWeight = FontWeight(500)
                                     )
@@ -423,7 +447,7 @@ fun HomePage(
                                 fontWeight = FontWeight(600),
                                 fontSize = 16.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.White
+                                color = mainFontColor
                             )
                             Spacer(modifier = Modifier.height(10.dp))
                             Row(
@@ -440,7 +464,7 @@ fun HomePage(
                                     fontWeight = FontWeight(600),
                                     fontSize = 17.sp,
                                     textAlign = TextAlign.Center,
-                                    color = if (model.adminCorrectAns.value == "1") Color.Green else Color.White
+                                    color = if (model.adminCorrectAns.value == "1") Color.Green else mainFontColor
                                 )
 
                                 Text(
@@ -452,7 +476,7 @@ fun HomePage(
                                     fontWeight = FontWeight(600),
                                     fontSize = 17.sp,
                                     textAlign = TextAlign.Center,
-                                    color = if (model.adminCorrectAns.value == "2") Color.Green else Color.White
+                                    color = if (model.adminCorrectAns.value == "2") Color.Green else mainFontColor
                                 )
 
                                 Text(
@@ -464,7 +488,7 @@ fun HomePage(
                                     fontWeight = FontWeight(600),
                                     fontSize = 17.sp,
                                     textAlign = TextAlign.Center,
-                                    color = if (model.adminCorrectAns.value == "3") Color.Green else Color.White
+                                    color = if (model.adminCorrectAns.value == "3") Color.Green else mainFontColor
                                 )
 
                                 Text(
@@ -476,7 +500,7 @@ fun HomePage(
                                     fontWeight = FontWeight(600),
                                     fontSize = 17.sp,
                                     textAlign = TextAlign.Center,
-                                    color = if (model.adminCorrectAns.value == "4") Color.Green else Color.White
+                                    color = if (model.adminCorrectAns.value == "4") Color.Green else mainFontColor
                                 )
                             }
 
@@ -504,6 +528,23 @@ fun HomePage(
                                     fontWeight = FontWeight(600)
                                 )
                             }
+
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                                Text(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(Color.Red)
+                                        .clickable { if (model.canContinue.value) model.LogoutFunctionallity() }
+                                        .padding(5.dp),
+                                    text = "Sign out",
+                                    fontWeight = FontWeight(600),
+                                    fontSize = 17.sp,
+                                    textAlign = TextAlign.Center,
+                                    color = Color.White
+                                )
+                            }
+
                         }
                     }
 

@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -44,6 +45,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.quizapp.VMs.Room.RoomModel
+import com.example.quizapp.ui.theme.mainFontColor
 import com.example.whatsapp.VMs.API.MainViewModel
 import com.example.whatsapp.VMs.API.QuizVM
 import kotlinx.coroutines.delay
@@ -57,7 +59,7 @@ fun QuestionComp(
     owner: LifecycleOwner
 ) {
     var showPopUp by remember {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
     val questionList = remember {
         mutableStateOf(emptyList<RoomModel>())
@@ -65,7 +67,7 @@ fun QuestionComp(
     mainViewModel.GetallQuestions()
     LaunchedEffect(Unit) {
         showPopUp = true
-        delay(1000)
+        delay(3000)
         showPopUp = false
     }
 
@@ -81,8 +83,8 @@ fun QuestionComp(
 
     if (questionList.value.size >= 10) {
 
-        val randomElements = remember { questionList.value.shuffled(Random(System.currentTimeMillis())).take(10) }
-
+        val randomElements =
+            remember { questionList.value.shuffled(Random(System.currentTimeMillis())).take(10) }
 
 
         var questionCounter by remember {
@@ -101,10 +103,11 @@ fun QuestionComp(
                     fontWeight = FontWeight(600),
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center,
-                    color = Color.White
+                    color = mainFontColor
                 )
             }
-        } else {
+        }
+        else {
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                 val correctBrush = Brush.linearGradient(
                     listOf(
@@ -139,7 +142,7 @@ fun QuestionComp(
                         fontWeight = FontWeight(600),
                         fontSize = 16.sp,
                         textAlign = TextAlign.End,
-                        color = Color.White
+                        color = mainFontColor
                     )
 
 
@@ -147,13 +150,13 @@ fun QuestionComp(
                     Text(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(2.dp, Color.White, RoundedCornerShape(8.dp))
+                            .border(2.dp, mainFontColor, RoundedCornerShape(8.dp))
                             .padding(16.dp),
                         text = "${randomElements[questionCounter].text}",
                         fontWeight = FontWeight(600),
                         fontSize = 16.sp,
                         textAlign = TextAlign.Center,
-                        color = Color.White
+                        color = mainFontColor
                     )
                     Spacer(modifier = Modifier.height(30.dp))
                     //ans 1
@@ -161,8 +164,8 @@ fun QuestionComp(
                         onClick = {
                             if (selectedBTN == 0) {
                                 selectedBTN = 1
-                                if(randomElements[questionCounter].correctAnswer == "1"){
-                                    model.correctAns.value +=1
+                                if (randomElements[questionCounter].correctAnswer == "1") {
+                                    model.correctAns.value += 1
                                 }
                             }
                         },
@@ -193,8 +196,8 @@ fun QuestionComp(
                         onClick = {
                             if (selectedBTN == 0) {
                                 selectedBTN = 2
-                                if(randomElements[questionCounter].correctAnswer == "2"){
-                                    model.correctAns.value +=1
+                                if (randomElements[questionCounter].correctAnswer == "2") {
+                                    model.correctAns.value += 1
                                 }
                             }
                         },
@@ -225,8 +228,8 @@ fun QuestionComp(
                         onClick = {
                             if (selectedBTN == 0) {
                                 selectedBTN = 3
-                                if(randomElements[questionCounter].correctAnswer == "3"){
-                                    model.correctAns.value +=1
+                                if (randomElements[questionCounter].correctAnswer == "3") {
+                                    model.correctAns.value += 1
                                 }
                             }
                         },
@@ -257,8 +260,8 @@ fun QuestionComp(
                         onClick = {
                             if (selectedBTN == 0) {
                                 selectedBTN = 4
-                                if(randomElements[questionCounter].correctAnswer == "4"){
-                                    model.correctAns.value +=1
+                                if (randomElements[questionCounter].correctAnswer == "4") {
+                                    model.correctAns.value += 1
                                 }
                             }
                         },
@@ -287,10 +290,9 @@ fun QuestionComp(
                     Spacer(modifier = Modifier.height(20.dp))
                     Button(
                         onClick = {
-                            if(questionCounter <9){
+                            if (questionCounter < 9) {
                                 questionCounter += 1
-                            }
-                            else{
+                            } else {
                                 showPopUp = true
                                 navController.navigate("showScorePage")
                             }
@@ -321,8 +323,67 @@ fun QuestionComp(
             }
         }
     } else {
-        Log.d("TAG", "QuestionComp: 10 ta question nadarim !")
+        model.add10Question()
+        if (showPopUp) {
+            Column(
+                Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
+                Text(
+                    text = "Loading !",
+                    fontWeight = FontWeight(600),
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    color = mainFontColor
+                )
+            }
+        }
+        else{
+            navController.navigate("questionPage")
+        }
+        /*
+        else{
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "10 ta soal nadarim !",
+                    color = mainFontColor,
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+                Button(
+                    onClick = {
+                        navController.navigate("homePage")
+                        model.correctAns.value = 0
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF1E88E5)
+                    )
+                ) {
+                    Text(
+                        text = "back home",
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+            }
+
+
+        }
+    */
     }
 
 

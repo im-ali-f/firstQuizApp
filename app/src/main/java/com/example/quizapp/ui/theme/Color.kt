@@ -21,3 +21,8 @@ val disabledText = Color(0xFF77777C)
 val enabledText = Color(0xFFA83838)
 val adminPanel = Color(0xFF975D5D)
 val adminAddColor = Color(0xFF7C975D)
+
+
+val mainFontColor = Color(0xFFD37F65)
+
+

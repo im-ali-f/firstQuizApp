@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.quizapp.ui.theme.mainFontColor
 import com.example.whatsapp.VMs.API.QuizVM
 
 @Composable
@@ -43,7 +44,7 @@ fun ScoreComp(navController: NavController,model:QuizVM) {
                     fontWeight = FontWeight(600),
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center,
-                    color = Color.White
+                    color = mainFontColor
                 )
                 //seperator
                 Spacer(modifier = Modifier.height(10.dp))
@@ -56,7 +57,7 @@ fun ScoreComp(navController: NavController,model:QuizVM) {
                     Box(
                         modifier = Modifier
                             .height(1.dp)
-                            .background(Color.White)
+                            .background(mainFontColor)
                             .fillMaxWidth()
                     )
 
@@ -76,7 +77,7 @@ fun ScoreComp(navController: NavController,model:QuizVM) {
                 fontWeight = FontWeight(600),
                 fontSize = 25.sp,
                 textAlign = TextAlign.Center,
-                color = Color.White
+                color = mainFontColor
             )
             Spacer(modifier = Modifier.height(20.dp))
             Button(
@@ -98,7 +99,7 @@ fun ScoreComp(navController: NavController,model:QuizVM) {
                     modifier = Modifier.offset(y = -5.dp),
                     textAlign = TextAlign.Center,
                     text = "back home",
-                    color = Color.White,
+                    color = mainFontColor,
                     fontSize = 24.sp,
                     fontWeight = FontWeight(600)
                 )
